@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+const MFE1Button = React.lazy(
+  // @ts-ignore
+  () => import('MFE1/Button')
+);
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>MFE2</h1>
+      <div>
+        <React.Suspense fallback='Loading Button'>
+          <MFE1Button />
+        </React.Suspense>
+      </div>
+      <h2>MFE2</h2>
     </div>
   );
 }
-
 export default App;
