@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './components/Header';
 
 const ProductsButton = React.lazy(
   // @ts-ignore
@@ -12,8 +13,8 @@ const CartsButton = React.lazy(
 
 export const App = () => {
   return (
-    <div>
-      <h1>Main</h1>
+    <>
+      <Header />
       <h1>Products</h1>
       <div>
         <React.Suspense fallback='Loading Button'>
@@ -26,7 +27,7 @@ export const App = () => {
           <CartsButton />
         </React.Suspense>
       </div>
-    </div>
+    </>
   );
 }
 export default App;
