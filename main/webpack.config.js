@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-module.exports = {
+const Dotenv = require('dotenv-webpack');
+
+module.exports = (env) => ({
   mode: 'development',
   devServer: {
     port: 9003,
@@ -30,13 +32,15 @@ module.exports = {
     ],
   },
   plugins: [
+    new Dotenv(),
     new ModuleFederationPlugin(
       {
-        name: 'MFE1',
+        name: 'MAIN',
         filename:
           'remoteEntry.js',
-        exposes: {
-          './Button': './src/Button',
+        remotes: {
+          PRODUCTS:
+            `PRODUCTS@${env.PRODUCTS_HOST}/remoteEntry.js`,
         },
       }
     ),
@@ -48,4 +52,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   }
-};
+});

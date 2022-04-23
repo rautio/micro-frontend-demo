@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Button = () => (
-  <button>MFE1 Button</button>
+  <button>Main Button</button>
 );
 
 export default Button;

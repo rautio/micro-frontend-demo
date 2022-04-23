@@ -32,12 +32,11 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin(
       {
-        name: 'MFE2',
+        name: 'PRODUCTS',
         filename:
           'remoteEntry.js',
-        remotes: {
-          MFE1:
-            'MFE1@http://localhost:9003/remoteEntry.js',
+        exposes: {
+          './Button': './src/Button',
         },
       }
     ),

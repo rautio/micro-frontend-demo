@@ -25,10 +25,11 @@
   },
   "scripts": {
     "cra-start": "react-scripts start",
-    "build": "react-scripts build",
+    "cra-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "webpack serve"
+    "start": "webpack serve --env PRODUCTS_HOST=http://localhost:9002",
+    "build": "webpack build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +49,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "dotenv-webpack": "^7.1.0"
+  }
 }
