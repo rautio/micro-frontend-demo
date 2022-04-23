@@ -40,7 +40,7 @@ module.exports = (env) => ({
           'remoteEntry.js',
         remotes: {
           PRODUCTS:
-            `PRODUCTS@${env.PRODUCTS_HOST}/remoteEntry.js`,
+            `PRODUCTS@${env.PRODUCTS_HOST || 'http://localhost:9003'}/remoteEntry.js`,
         },
       }
     ),
