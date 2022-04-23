@@ -1,4 +1,4 @@
-# Micro Frontend Demo 
+# Micro Frontend Demo
 
 A sample repo for demoing a micro frontend architecture setup.
 
@@ -12,3 +12,7 @@ TBD
 - React
 - Typescript
 - Webpack v5 (w/ Module Federation)
+
+## Scripts
+
+- `yarn turbo run start`

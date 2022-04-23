@@ -28,7 +28,7 @@
     "cra-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "webpack serve --env PRODUCTS_HOST=http://localhost:9002",
+    "start": "webpack serve --env PRODUCTS_HOST=http://localhost:9002 --env CART_HOST=http://localhost:9003",
     "build": "webpack build"
   },
   "eslintConfig": {

@@ -25,10 +25,11 @@
   },
   "scripts": {
     "cra-start": "react-scripts start",
-    "build": "react-scripts build",
+    "cra-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "webpack serve"
+    "start": "webpack serve",
+    "build": "webpack build"
   },
   "eslintConfig": {
     "extends": [

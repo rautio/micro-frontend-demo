@@ -1,11 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const Dotenv = require('dotenv-webpack');
-
-module.exports = (env) => ({
+module.exports = {
   mode: 'development',
   devServer: {
-    port: 9001,
+    port: 9003,
   },
   module: {
     rules: [
@@ -32,15 +30,13 @@ module.exports = (env) => ({
     ],
   },
   plugins: [
-    new Dotenv(),
     new ModuleFederationPlugin(
       {
-        name: 'MAIN',
+        name: 'CART',
         filename:
           'remoteEntry.js',
-        remotes: {
-          PRODUCTS: `PRODUCTS@${env.PRODUCTS_HOST || 'http://localhost:9002'}/remoteEntry.js`,
-          CART: `CART@${env.CART_HOST || 'http://localhost:9003'}/remoteEntry.js`,
+        exposes: {
+          './Button': './src/Button',
         },
       }
     ),
@@ -52,4 +48,4 @@ module.exports = (env) => ({
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   }
-});
+};

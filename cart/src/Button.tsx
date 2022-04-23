@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
 const Button: FC = () => (
-  <button>Products Button</button>
+  <button>Cart Button</button>
 );
 export default Button;
