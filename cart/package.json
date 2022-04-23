@@ -24,10 +24,11 @@
     "webpack-server": "^0.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "cra-start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "webpack serve"
   },
   "eslintConfig": {
     "extends": [
