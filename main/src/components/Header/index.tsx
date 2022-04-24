@@ -6,8 +6,15 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import SettingsIcon from "@mui/icons-material/Settings";
 import MenuIcon from "@mui/icons-material/Menu";
+import ErrorBoundary from "../ErrorBoundary";
+
+const Cart = React.lazy(
+  // @ts-ignore
+  () => import('CART/Cart')
+);
 
 export const Header = () => {
+  console.log({ Cart });
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ minHeight: "48px" }}>
@@ -29,16 +36,11 @@ export const Header = () => {
           >
             Micro Frontend Demo
           </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2, marginLeft: "48px" }}
-            onClick={() => {}}
-          >
-            <SettingsIcon />
-          </IconButton>
+          <ErrorBoundary>
+            <React.Suspense fallback='Loading Button'>
+              <Cart />
+            </React.Suspense>
+          </ErrorBoundary>
         </Toolbar>
       </AppBar>
     </Box>

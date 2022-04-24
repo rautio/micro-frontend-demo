@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const { dependencies } = require('./package.json');
+
 module.exports = {
   mode: 'development',
   devServer: {
@@ -38,6 +40,11 @@ module.exports = {
         exposes: {
           './Button': './src/Button',
         },
+        shared: {
+          ...dependencies,
+          'react': { eager: true, singleton: true, requiredVersion: dependencies['react']},
+          'react-dom': { eager: true, singleton: true, requiredVersion: dependencies['react-dom']},
+        }
       }
     ),
     new HtmlWebpackPlugin({

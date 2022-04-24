@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const Dotenv = require('dotenv-webpack');
+const { dependencies } = require('./package.json');
 
 module.exports = (env) => ({
   mode: 'development',
@@ -28,7 +29,11 @@ module.exports = (env) => ({
         use: [{
             loader: 'ts-loader'
         }]
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   plugins: [
@@ -36,12 +41,17 @@ module.exports = (env) => ({
     new ModuleFederationPlugin(
       {
         name: 'MAIN',
-        filename:
-          'remoteEntry.js',
+        // filename:
+        //   'remoteEntry.js',
         remotes: {
           PRODUCTS: `PRODUCTS@${env.PRODUCTS_HOST || 'http://localhost:9002'}/remoteEntry.js`,
           CART: `CART@${env.CART_HOST || 'http://localhost:9003'}/remoteEntry.js`,
         },
+        shared: {
+          ...dependencies,
+          'react': { eager: true, singleton: true, requiredVersion: dependencies['react']},
+          'react-dom': { eager: true, singleton: true, requiredVersion: dependencies['react-dom']},
+        }
       }
     ),
     new HtmlWebpackPlugin({

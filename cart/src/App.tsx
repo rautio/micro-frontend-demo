@@ -1,11 +1,11 @@
 import React from 'react';
-import Button from './Button';
+import Cart from './Cart';
 
 export const  App = () => {
   return (
     <div>
       <h1>Cart</h1>
-      <Button />
+      <Cart />
     </div>
   );
 }
