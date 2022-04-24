@@ -3,7 +3,6 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 
 export const Cart = () => {
-  console.log("rendering cart!")
   return (
     <IconButton
       size="large"

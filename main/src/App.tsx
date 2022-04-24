@@ -1,21 +1,14 @@
 import React from 'react';
 import Header from './components/Header';
-
-const ProductsButton = React.lazy(
-  // @ts-ignore
-  () => import('PRODUCTS/Button')
-);
+import RemoteControls from './components/RemoteControls';
+import Product from './features/product';
 
 export const App = () => {
   return (
     <>
       <Header />
-      <h1>Products</h1>
-      <div>
-        <React.Suspense fallback='Loading Button'>
-          <ProductsButton />
-        </React.Suspense>
-      </div>
+      <RemoteControls />
+      <Product />
     </>
   );
 }
