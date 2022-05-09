@@ -1,2 +1,2 @@
 // @ts-ignore
-import('./bootstrap');
+import("./bootstrap");
