@@ -6,7 +6,8 @@
     "turbo": "^1.2.5"
   },
   "scripts": {
-    "start": "yarn turbo run start"
+    "start": "yarn turbo run start",
+    "build": "yarn turbo run build"
   },
   "workspaces": [
     "main",

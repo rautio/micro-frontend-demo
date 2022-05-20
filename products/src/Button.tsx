@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
+import Button from "@mui/material/Button";
 
-const Button: FC = () => (
-  <button>Products Button</button>
-);
-export default Button;
+const ProductButton: FC = () => {
+  console.log({ url: window.location.href });
+  return <Button>Products Button</Button>;
+};
+export default ProductButton;
