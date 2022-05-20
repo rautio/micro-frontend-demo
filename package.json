@@ -5,6 +5,9 @@
   "devDependencies": {
     "turbo": "^1.2.5"
   },
+  "scripts": {
+    "start": "yarn turbo run start"
+  },
   "workspaces": [
     "main",
     "cart",

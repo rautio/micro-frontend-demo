@@ -2,6 +2,15 @@
 
 A sample repo for demoing a micro frontend architecture setup.
 
+## Getting started
+
+1. Run: `yarn start`
+2. Navigate to `http://localhost:9001/`
+
+Main Host App: `http://localhost:9001/`
+Products Remote: `http://localhost:9002/`
+Cart Remote: `http://localhost:9003/`
+
 ## Architecture
 
 TBD
