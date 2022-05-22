@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import Grid from "@mui/material/Grid";
 import ProductCard from "../ProductCard";
 import Fruit from "../Fruit";
 
@@ -7,20 +8,32 @@ type Props = {
   price: number;
 };
 
+const items = [
+  { name: "Grapefruit", price: 1.5 },
+  { name: "Apple", price: 0.75 },
+  { name: "Guava", price: 0.75 },
+  { name: "PassionFruit", price: 0.75 },
+  { name: "Banana", price: 0.75 },
+  { name: "FruitBowl", price: 0.75 },
+  { name: "Pineapple", price: 0.75 },
+  { name: "Pomegranite", price: 0.75 },
+  { name: "Watermelon", price: 0.75 },
+];
 const Product: FC<Props> = ({ name, price }) => (
-  <ProductCard name={name} price={price}>
-    <Fruit name={name} />
-  </ProductCard>
+  <Grid item>
+    <ProductCard name={name} price={price}>
+      <Fruit name={name} />
+    </ProductCard>
+  </Grid>
 );
 
 export const ProductsList = () => {
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      <Product name="Grapefruit" price={1.5} />
-      <Product name="Apple" price={0.75} />
-      <Product name="Guava" price={0.5} />
-      <Product name="PassionFruit" price={1.0} />
-    </div>
+    <Grid container direction="row" spacing={2}>
+      {items.map(({ name, price }) => (
+        <Product name={name} key={name} price={price} />
+      ))}
+    </Grid>
   );
 };
 

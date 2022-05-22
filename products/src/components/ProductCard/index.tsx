@@ -24,7 +24,7 @@ export const ProductCard: FC<Props> = ({ name, price, children }) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
-        <Button size="small" href="/">
+        <Button size="small" variant="contained">
           Add to Cart
         </Button>
       </CardActions>
