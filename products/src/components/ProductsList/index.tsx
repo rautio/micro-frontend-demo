@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import Grid from "@mui/material/Grid";
 import ProductCard from "../ProductCard";
-import Fruit from "../Fruit";
 
 type Props = {
   name: string;
@@ -21,9 +20,7 @@ const items = [
 ];
 const Product: FC<Props> = ({ name, price }) => (
   <Grid item>
-    <ProductCard name={name} price={price}>
-      <Fruit name={name} />
-    </ProductCard>
+    <ProductCard name={name} price={price} />
   </Grid>
 );
 

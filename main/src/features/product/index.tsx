@@ -31,7 +31,7 @@ const Header = () => {
             Shop Name
           </Typography>
           <ErrorBoundary>
-            <React.Suspense fallback="Loading Button">
+            <React.Suspense fallback="Loading Cart...">
               <Cart />
             </React.Suspense>
           </ErrorBoundary>
@@ -47,7 +47,7 @@ export const Product = () => {
       <Header />
       <h1>Products</h1>
       <div>
-        <React.Suspense fallback="Loading Button">
+        <React.Suspense fallback="Loading Products...">
           <ProductsButton />
           <Products />
         </React.Suspense>
