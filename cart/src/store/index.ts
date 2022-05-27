@@ -59,4 +59,16 @@ export const useStore = create<State>((set) => ({
   },
 }));
 
+export const useCartCount = (product?: string): number => {
+  const products = useStore((store) => store.cart);
+  const count = products.reduce((acc, cur) => {
+    let curCount = acc;
+    if (!product || product === cur.name) {
+      curCount += cur?.quantity || 0;
+    }
+    return curCount;
+  }, 0);
+  return count || 0;
+};
+
 export default useStore;
