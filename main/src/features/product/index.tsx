@@ -24,7 +24,7 @@ const Header = () => {
             component="div"
             sx={{ flexGrow: 1, textAlign: "center" }}
           >
-            Shop Name
+            Fruit Store
           </Typography>
           <ErrorBoundary>
             <React.Suspense fallback="Loading Cart...">
@@ -41,8 +41,7 @@ export const Product = () => {
   return (
     <div style={{ margin: "10px", border: "1px solid black" }}>
       <Header />
-      <h1>Products</h1>
-      <div>
+      <div style={{ marginTop: 40 }}>
         <ErrorBoundary>
           <React.Suspense fallback="Loading Products...">
             <Products />
