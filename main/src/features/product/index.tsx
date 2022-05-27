@@ -4,14 +4,10 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ErrorBoundary from "../../components/ErrorBoundary";
-const ProductsButton = React.lazy(
-  // @ts-ignore
-  () => import("PRODUCTS/Button")
-);
 
 const Products = React.lazy(
   // @ts-ignore
-  () => import("PRODUCTS/Products")
+  () => import("PRODUCTS/ProductsList")
 );
 const Cart = React.lazy(
   // @ts-ignore
@@ -47,10 +43,11 @@ export const Product = () => {
       <Header />
       <h1>Products</h1>
       <div>
-        <React.Suspense fallback="Loading Products...">
-          <ProductsButton />
-          <Products />
-        </React.Suspense>
+        <ErrorBoundary>
+          <React.Suspense fallback="Loading Products...">
+            <Products />
+          </React.Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   );

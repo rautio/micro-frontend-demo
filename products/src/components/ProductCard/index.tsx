@@ -19,6 +19,7 @@ import Fruit from "../Fruit";
 interface Props {
   name: string;
   price: number;
+  cartView?: boolean;
 }
 
 interface Product {
@@ -26,14 +27,17 @@ interface Product {
   quantity?: number;
 }
 
-export const ProductCard: FC<Props> = ({ name, price }) => {
-  // @ts-ignore
-  const addItem = useStore((state) => state.addItem);
-  // @ts-ignore
-  const removeItem = useStore((state) => state.removeItem);
-  // @ts-ignore
-  const cart = useStore((state) => state.cart);
-  console.log({ cart });
+// TODO: Import this interface from the cart module
+interface Store {
+  cart: Array<Product>;
+  addItem: () => void;
+  removeItem: () => void;
+}
+
+export const ProductCard: FC<Props> = ({ name, price, cartView = false }) => {
+  const addItem = useStore((state: Store) => state.addItem);
+  const removeItem = useStore((state: Store) => state.removeItem);
+  const cart = useStore((state: Store) => state.cart);
   let action = (
     <Button
       size="small"
@@ -41,7 +45,6 @@ export const ProductCard: FC<Props> = ({ name, price }) => {
       endIcon={<AddShoppingCart />}
       sx={{ marginBottom: "40px" }}
       onClick={() => {
-        // @ts-ignore
         addItem({ name, price });
       }}
     >
@@ -74,20 +77,27 @@ export const ProductCard: FC<Props> = ({ name, price }) => {
           onClick={() => removeItem(name, quantity)}
           endIcon={<Delete />}
         >
-          Remove from Cart
+          Remove
         </Button>
       </div>
     );
   }
 
   return (
-    <Card sx={{ width: 275 }} variant="outlined">
+    <Card
+      sx={{
+        display: "flex",
+        flexDirection: cartView ? "row" : "column",
+      }}
+      variant="outlined"
+    >
       <CardContent>
         <Typography sx={{ mb: 1.5 }} color="text.secondary" gutterBottom>
-          {name} {isItemInCart && <Check sx={{ float: "right" }} />}
+          {name}{" "}
+          {isItemInCart && !cartView && <Check sx={{ float: "right" }} />}
         </Typography>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Fruit name={name} width="150" />
+          <Fruit name={name} width={cartView ? "75" : "150"} />
         </div>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           ${price}

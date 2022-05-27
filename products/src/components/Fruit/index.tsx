@@ -29,13 +29,13 @@ export const Fruit: FC<Props> = ({ name, width = "200", height }) => {
     case "Banana":
       imgSrc = Banana;
       break;
-    case "FruitBowl":
+    case "Fruit Bowl":
       imgSrc = FruitBowl;
       break;
     case "Guava":
       imgSrc = Guava;
       break;
-    case "PassionFruit":
+    case "Passion Fruit":
       imgSrc = PassionFruit;
       break;
     case "Pineapple":

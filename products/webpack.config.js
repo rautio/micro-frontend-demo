@@ -51,8 +51,9 @@ module.exports = (env) => {
           CART: `CART@${CART_HOST}/remoteEntry.js`,
         },
         exposes: {
-          "./Button": "./src/Button",
-          "./Products": "./src/components/ProductsList",
+          "./ProductsList": "./src/components/ProductsList",
+          "./ProductCard": "./src/components/ProductCard",
+          "./products": "./src/products",
         },
         shared: {
           ...dependencies,
