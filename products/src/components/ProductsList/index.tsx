@@ -15,7 +15,7 @@ const items = [
   { name: "Banana", price: 0.75 },
   { name: "FruitBowl", price: 0.75 },
   { name: "Pineapple", price: 0.75 },
-  { name: "Pomegranite", price: 0.75 },
+  { name: "Pomegranate", price: 0.75 },
   { name: "Watermelon", price: 0.75 },
 ];
 const Product: FC<Props> = ({ name, price }) => (

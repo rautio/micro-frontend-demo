@@ -7,7 +7,7 @@ import FruitBowl from "./images/bowl_fruit1.jpg";
 import Guava from "./images/guava.jpg";
 import PassionFruit from "./images/passion_fruit.jpg";
 import Pineapple from "./images/pineapple1.jpg";
-import Pomegranite from "./images/pomegranite.jpg";
+import Pomegranate from "./images/pomegranate.jpg";
 import Watermelon from "./images/watermelon.jpg";
 import NoImage from "./images/no-image.png";
 
@@ -41,8 +41,8 @@ export const Fruit: FC<Props> = ({ name, width = "200", height }) => {
     case "Pineapple":
       imgSrc = Pineapple;
       break;
-    case "Pomegranite":
-      imgSrc = Pomegranite;
+    case "Pomegranate":
+      imgSrc = Pomegranate;
       break;
     case "Watermelon":
       imgSrc = Watermelon;
