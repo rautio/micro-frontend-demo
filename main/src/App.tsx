@@ -14,29 +14,31 @@ export const App = () => {
       <Header />
       <RemoteControls />
       <div style={{ margin: "10px", border: "1px solid black" }}>
-        <StoreHeader />
-        <div style={{ marginTop: 40 }}>
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <RemoteWrapper fallback="Loading Products...">
-                    <Products />
-                  </RemoteWrapper>
-                }
-              />
-              <Route
-                path="/checkout"
-                element={
-                  <RemoteWrapper fallback="Loading...">
-                    <CheckoutPage />
-                  </RemoteWrapper>
-                }
-              />
-            </Routes>
-          </BrowserRouter>
-        </div>
+        <BrowserRouter>
+          <>
+            <StoreHeader />
+            <div style={{ marginTop: 40 }}>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <RemoteWrapper fallback="Loading Products...">
+                      <Products />
+                    </RemoteWrapper>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <RemoteWrapper fallback="Loading...">
+                      <CheckoutPage />
+                    </RemoteWrapper>
+                  }
+                />
+              </Routes>
+            </div>
+          </>
+        </BrowserRouter>
       </div>
     </>
   );

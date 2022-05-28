@@ -36,7 +36,7 @@ export const Cart = () => {
         </StyledBadge>
       </IconButton>
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <CheckoutPanel />
+        <CheckoutPanel onClose={() => setOpen(false)} />
       </Drawer>
     </>
   );
