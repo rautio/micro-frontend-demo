@@ -57,6 +57,7 @@ module.exports = (env) => {
         exposes: {
           "./Cart": "./src/components/CartButton",
           "./cartStore": "./src/store",
+          "./CheckoutPage": "./src/features/checkout",
         },
         remotes: {
           CART: `CART@${CART_HOST}/remoteEntry.js`,

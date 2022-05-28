@@ -24,6 +24,27 @@ TBD
 - Error Boundary/Safe loading. + Suspense in 'FederatedWrapper'
 - Versioning between host and remotes
 - Versioning node_modules?
+- Routing. How do you do in-browser linking from a remote component when the host is the one controlling the router? What happens if you use mismatching versions of react-router?
+
+### React Component
+
+To safely load react components:
+
+Note: You need an ErrorBoundary component.
+
+```
+
+const RemoteComponent = React.lazy(() => import("Remote/Component"));
+
+export const App = () => (
+  <ErrorBoundary>
+    <React.Suspense fallback="Loading...">
+      <RemoteComponent />
+    </React.Suspense>
+  </ErrorBoundary>
+)
+
+```
 
 ## Tech Stack
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ErrorBoundary from "../ErrorBoundary";
 import useStore from "../../store";
 // @ts-ignore
@@ -8,12 +9,15 @@ const ProductCard = React.lazy(
   () => import("PRODUCTS/ProductCard")
 );
 
+// TODO: How to do in-browser routing if using different verisons of react-router-dom
 export const CheckoutPanel = () => {
   const cart = useStore((store) => store.cart);
   return (
     <div style={{ minWidth: 200 }}>
       <h2 style={{ textAlign: "center" }}>Cart</h2>
       <p>TODO: Link to checkout page</p>
+      {/* <Link to="/checkout">Checkout!</Link> */}
+      <a href="/checkout">Checkout!</a>
       <p>Total: $ XX.XX</p>
       <div style={{ display: "flex", flexDirection: "column" }}>
         {cart.map(({ name, quantity }) => (
