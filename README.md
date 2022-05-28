@@ -15,6 +15,8 @@ Cart Remote: `http://localhost:9003/`
 
 TBD
 
+### Open Items
+
 - Dynamic remote URLs
 - Deployment
 - Sharing state from host to application (props)
@@ -25,6 +27,7 @@ TBD
 - Versioning between host and remotes
 - Versioning node_modules?
 - Routing. How do you do in-browser linking from a remote component when the host is the one controlling the router? What happens if you use mismatching versions of react-router?
+- How can you share local/session state between remote and host?
 
 ### React Component
 

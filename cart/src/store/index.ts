@@ -15,8 +15,26 @@ const validItem = (item: Product) => {
   return !!item && typeof item === "object" && typeof item?.name === "string";
 };
 
+const STORAGE_ID = "fruit-shop-cart";
+
+const getLocalState = (): Array<Product> => {
+  const rawData = localStorage.getItem(STORAGE_ID);
+  if (rawData) {
+    const parsed = JSON.parse(rawData);
+    if (Array.isArray(parsed)) {
+      return parsed;
+    }
+  }
+  return [];
+};
+
+const updateLocalState = (newCart: Array<Product>): void => {
+  console.log({ newCart });
+  localStorage.setItem(STORAGE_ID, JSON.stringify(newCart));
+};
+
 export const useStore = create<State>((set) => ({
-  cart: [],
+  cart: getLocalState(),
   addItem: (newItem) => {
     if (validItem(newItem)) {
       set((state) => {
@@ -33,6 +51,7 @@ export const useStore = create<State>((set) => ({
         } else {
           cart.push({ quantity: 1, ...newItem });
         }
+        updateLocalState(cart);
         return { cart };
       });
     }
@@ -53,6 +72,7 @@ export const useStore = create<State>((set) => ({
             };
           }
         }
+        updateLocalState(cart);
         return { cart };
       });
     }
