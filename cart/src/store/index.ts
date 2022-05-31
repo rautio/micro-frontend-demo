@@ -29,7 +29,6 @@ const getLocalState = (): Array<Product> => {
 };
 
 const updateLocalState = (newCart: Array<Product>): void => {
-  console.log({ newCart });
   localStorage.setItem(STORAGE_ID, JSON.stringify(newCart));
 };
 

@@ -100,7 +100,7 @@ export const ProductCard: FC<Props> = ({ name, price, cartView = false }) => {
           <Fruit name={name} width={cartView ? "75" : "150"} />
         </div>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          ${price}
+          ${(price || 0).toFixed(2)}
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>{action}</CardActions>
