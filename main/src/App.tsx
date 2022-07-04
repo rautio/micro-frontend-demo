@@ -4,10 +4,9 @@ import Header from "./components/Header";
 import StoreHeader from "./components/StoreHeader";
 import RemoteControls from "./components/RemoteControls";
 import RemoteWrapper from "./components/RemoteWrapper";
+import RemoteComponent from "./components/RemoteComponent";
 // @ts-ignore
 const CheckoutPage = React.lazy(() => import("CART/CheckoutPage"));
-// @ts-ignore
-const Products = React.lazy(() => import("PRODUCTS/ProductsList"));
 export const App = () => {
   return (
     <>
@@ -22,9 +21,11 @@ export const App = () => {
                 <Route
                   path="/"
                   element={
-                    <RemoteWrapper fallback="Loading Products...">
-                      <Products />
-                    </RemoteWrapper>
+                    <RemoteComponent
+                      fallback="Loading Products..."
+                      remote="PRODUCTS"
+                      component="ProductsList"
+                    />
                   }
                 />
                 <Route

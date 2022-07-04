@@ -23,6 +23,7 @@ module.exports = (env) => {
               loader: "babel-loader",
               options: {
                 presets: ["@babel/preset-env", "@babel/preset-react"],
+                plugins: ["@babel/plugin-transform-runtime"],
               },
             },
           ],
@@ -46,10 +47,7 @@ module.exports = (env) => {
       new Dotenv(),
       new ModuleFederationPlugin({
         name: "MAIN",
-        // filename:
-        //   'remoteEntry.js',
         remotes: {
-          PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
           CART: `CART@${CART_HOST}/remoteEntry.js`,
         },
         shared: {
