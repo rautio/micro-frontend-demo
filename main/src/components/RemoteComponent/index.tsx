@@ -9,6 +9,7 @@ type Props = {
   remote: "PRODUCTS" | "CART";
   component: string;
   scope?: string;
+  [key: string]: any;
 };
 
 const RemoteComponent: FC<Props> = ({
@@ -16,6 +17,7 @@ const RemoteComponent: FC<Props> = ({
   component,
   scope = "default",
   fallback = null,
+  ...props
 }) => {
   const [remotes] = useRemotes();
   const remoteUrl = findRemoteUrl(remote, remotes);
@@ -25,7 +27,7 @@ const RemoteComponent: FC<Props> = ({
   return (
     <ErrorBoundary>
       <React.Suspense fallback={fallback}>
-        <Component />
+        <Component {...props} />
       </React.Suspense>
     </ErrorBoundary>
   );

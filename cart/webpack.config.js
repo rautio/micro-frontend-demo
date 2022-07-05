@@ -5,7 +5,6 @@ const { dependencies } = require("./package.json");
 
 module.exports = (env) => {
   const PRODUCTS_HOST = env.PRODUCTS_HOST || "http://localhost:9002";
-  const CART_HOST = env.CART_HOST || "http://localhost:9002";
   return {
     mode: "development",
     devServer: {
@@ -60,8 +59,7 @@ module.exports = (env) => {
           "./CheckoutPage": "./src/features/checkout",
         },
         remotes: {
-          CART: `CART@${CART_HOST}/remoteEntry.js`,
-          PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
+          // PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
         },
 
         shared: {

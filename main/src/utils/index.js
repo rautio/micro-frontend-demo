@@ -24,7 +24,6 @@ export const fetchRemote = (url, remoteName) =>
           }
         },
       };
-      console.log({ proxy });
       resolve(proxy);
     };
     // Lastly we inject the script tag into the document's head to trigger the script load

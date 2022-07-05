@@ -1,4 +1,6 @@
-export const products = [
+export type Products = { name: string; price: number }[];
+
+export const products: Products = [
   { name: "Grapefruit", price: 1.5 },
   { name: "Apple", price: 0.5 },
   { name: "Guava", price: 0.75 },
