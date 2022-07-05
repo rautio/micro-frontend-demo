@@ -7,12 +7,6 @@ Demoing a micro frontend architecture setup in a fictional online store selling 
 1. Run: `yarn start`
 2. Navigate to `http://localhost:9001/`
 
-Main Host App: `http://localhost:9001/`
-
-Products Remote: `http://localhost:9002/`
-
-Cart Remote: `http://localhost:9003/`
-
 ## Deployment
 
 We are using environment variables to dynamically change where we fetch Products Remote and Cart Remote during deployment.
@@ -44,6 +38,7 @@ Locally Products and Cart remotes point to `localhost:9002` and `localhost:9003`
 For this app we are deploying using [Vercel](https://vercel.com/) and have defined the environment variables in the pipeline configurations to be:
 
 `CART_HOST: 'https://micro-frontend-demo-seven.vercel.app'`
+
 `PRODUCTS_HOST: 'https://micro-frontend-demo-products.vercel.app'`
 
 ## Tech Stack
