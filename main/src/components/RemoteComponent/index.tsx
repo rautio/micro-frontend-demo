@@ -1,16 +1,14 @@
 import React, { FC } from "react";
 import ErrorBoundary from "../ErrorBoundary";
+import { useRemotes } from "../../context/remotes";
 import { loadComponent } from "../../utils";
+import { findRemoteUrl } from "../../utils/remote";
 
 type Props = {
   fallback?: string | React.ReactNode;
-  remote: "PRODUCTS";
+  remote: "PRODUCTS" | "CART";
   component: string;
   scope?: string;
-};
-
-const urls = {
-  PRODUCTS: process.env.PRODUCTS_HOST,
 };
 
 const RemoteWrapper: FC<Props> = ({
@@ -19,8 +17,10 @@ const RemoteWrapper: FC<Props> = ({
   scope = "default",
   fallback = null,
 }) => {
+  const [remotes] = useRemotes();
+  const remoteUrl = findRemoteUrl(remote, remotes);
   const Component = React.lazy(
-    loadComponent(remote, urls[remote], `./${component}`, scope)
+    loadComponent(remote, remoteUrl, `./${component}`, scope)
   );
   return (
     <ErrorBoundary>
