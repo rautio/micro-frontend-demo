@@ -2,60 +2,38 @@
 
 A sample repo for demoing a micro frontend architecture setup.
 
+![Dynamic Remotes](./main/images/dynamic_remotes.gif)
+
+Live Example: [https://micro-frontend-demo-main.vercel.app/](https://micro-frontend-demo-main.vercel.app/)
+
 ## Getting started
 
 1. Run: `yarn start`
 2. Navigate to `http://localhost:9001/`
 
-Main Host App: `http://localhost:9001/`
-Products Remote: `http://localhost:9002/`
-Cart Remote: `http://localhost:9003/`
+## Dynamic Remotes
 
-## Architecture
+We are taking advantage of Webpack Module Federation's [Dynamic Remote Containers](https://webpack.js.org/concepts/module-federation/#dynamic-remote-containers) to dynamically update the remote apps within a React micro frontend.
 
-TBD
+This works by injecting a script tag into the DOM to fetch the remote app at run time using the `fetchRemote` function found in: `main/src/utils/index.js`.
 
-### Open Items
+`RemoteComponent` is a React component we can re-use throughout our application to render modules from a remote app. It encapsulates:
 
-- Dynamic remote URLs
-- Deployment
-- Sharing state from host to application (props)
-- Sharing global state from host to remotes (zustand?)
-- Sharing local storage (persist cart)
-- Central analytics event stream
-- Error Boundary/Safe loading. + Suspense in 'FederatedWrapper'
-- Versioning between host and remotes
-- Versioning node_modules?
-- Routing. How do you do in-browser linking from a remote component when the host is the one controlling the router? What happens if you use mismatching versions of react-router?
-- How can you share local/session state between remote and host?
+- `ErrorBoundary` to safely render remote code without breaking our host app.
+- Lazy loading using `React.Lazy` to fetch and resolve the remote code as needed without blocking the rest of our app rendering.
+- Fetching and managing remote containers.
 
-### React Component
-
-To safely load react components:
-
-Note: You need an ErrorBoundary component.
-
+```javascript
+<RemoteComponent
+  // Text displayed while the component is being fetched
+  fallback="Loading..."
+  // Which remote to fetch the component from
+  remote="RemoteApp"
+  // Name of the React component exposed in our remote app
+  module="HelloWorld"
+/>
 ```
 
-const RemoteComponent = React.lazy(() => import("Remote/Component"));
+The implementation can be found in: `main/src/components/RemoteComponent/index.tsx`
 
-export const App = () => (
-  <ErrorBoundary>
-    <React.Suspense fallback="Loading...">
-      <RemoteComponent />
-    </React.Suspense>
-  </ErrorBoundary>
-)
-
-```
-
-## Tech Stack
-
-- [Turborepo](https://turborepo.org/)
-- React
-- Typescript
-- Webpack v5 (w/ Module Federation)
-
-## Scripts
-
-- `yarn turbo run start`
+Within the implementation we call a `loadComponent` function that acts as a middle man between the `RemoteComponent` and `fetchRemote` functions to manage our loaded remote containers.
