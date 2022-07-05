@@ -1,53 +1,37 @@
 # Micro Frontend Demo
 
-A sample repo for demoing a micro frontend architecture setup.
+Demoing a micro frontend architecture setup in a fictional online store selling different types of fruit.
 
 ## Getting started
 
 1. Run: `yarn start`
 2. Navigate to `http://localhost:9001/`
 
+## Deployment
+
 Main Host App: `http://localhost:9001/`
+
 Products Remote: `http://localhost:9002/`
+
 Cart Remote: `http://localhost:9003/`
 
-## Architecture
+## Shared Global State
 
-TBD
+We are using [Zustand](https://github.com/pmndrs/zustand) as a global state management tool that is shared between the remote applications in this microfrontend app.
 
-### Open Items
+**Disclaimer**: This is only for demo purposes and you should try to not use any shared state, especially global state, in your microfrontend as much as possible. It can introduce unnecessary and hard to manage dependencies between your sub-apps reducing the independence and autonomy your teams experience.
 
-- Dynamic remote URLs
-- Deployment
-- Sharing state from host to application (props)
-- Sharing global state from host to remotes (zustand?)
-- Sharing local storage (persist cart)
-- Central analytics event stream
-- Error Boundary/Safe loading. + Suspense in 'FederatedWrapper'
-- Versioning between host and remotes
-- Versioning node_modules?
-- Routing. How do you do in-browser linking from a remote component when the host is the one controlling the router? What happens if you use mismatching versions of react-router?
-- How can you share local/session state between remote and host?
+The `Cart` Remote App initializes a Zustand store to manage the user's active cart. It exposes 3 items:
 
-### React Component
+- `cart`: Array of products & quantities in the cart.
+- `addItem`: Function to add a new item to the cart.
+- `removeItem`: Function to remove an item from the cart.
 
-To safely load react components:
+It is initialized in: `cart/src/store/index.ts`
 
-Note: You need an ErrorBoundary component.
+The `Product` Remote App uses this cart within the `<ProductCard />` component to render the fruit card differently depending on whether it is already in the cart or not. It displayes the quantity of that fruit in the cart and the ability to change the quantity or remove all items of that fruit. This card is rendered in the main homepage, the checkout side panel and the main checkout page.
 
-```
-
-const RemoteComponent = React.lazy(() => import("Remote/Component"));
-
-export const App = () => (
-  <ErrorBoundary>
-    <React.Suspense fallback="Loading...">
-      <RemoteComponent />
-    </React.Suspense>
-  </ErrorBoundary>
-)
-
-```
+`<ProductCard />` can be found at: `products/src/components/ProductCard/index.tsx`
 
 ## Tech Stack
 
@@ -55,7 +39,3 @@ export const App = () => (
 - React
 - Typescript
 - Webpack v5 (w/ Module Federation)
-
-## Scripts
-
-- `yarn turbo run start`
