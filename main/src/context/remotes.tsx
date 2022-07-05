@@ -11,8 +11,8 @@ export interface Remotes {
 }
 
 const initRemotes = [
-  { name: "PRODUCTS", url: `${process.env.CART_HOST}/remoteEntry.js` },
-  { name: "CART", url: `${process.env.CART_HOST}/remoteEntry.js` },
+  { name: "PRODUCTS", url: process.env.PRODUCTS_HOST || "" },
+  { name: "CART", url: process.env.CART_HOST || "" },
 ];
 
 const initState: Remotes = {

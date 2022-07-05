@@ -39,7 +39,10 @@ export const loadComponent =
       // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
       // eslint-disable-next-line no-undef
       await __webpack_init_sharing__(scope); // TODO when would you use a different scope?
-      const fetchedContainer = await fetchRemote(remoteUrl, remoteName);
+      const fetchedContainer = await fetchRemote(
+        `${remoteUrl.replace(/\/$/, "")}/remoteEntry.js`,
+        remoteName
+      );
       // eslint-disable-next-line no-undef
       await fetchedContainer.init(__webpack_share_scopes__[scope]);
     }
