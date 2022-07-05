@@ -3,11 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import StoreHeader from "./components/StoreHeader";
 import RemoteControls from "./components/RemoteControls";
-import RemoteWrapper from "./components/RemoteWrapper";
 import RemoteComponent from "./components/RemoteComponent";
 import RemotesProvider from "./context/remotes";
-// @ts-ignore
-const CheckoutPage = React.lazy(() => import("CART/CheckoutPage"));
 export const App = () => {
   return (
     <RemotesProvider>
@@ -32,9 +29,11 @@ export const App = () => {
                 <Route
                   path="/checkout"
                   element={
-                    <RemoteWrapper fallback="Loading...">
-                      <CheckoutPage />
-                    </RemoteWrapper>
+                    <RemoteComponent
+                      fallback="Loading..."
+                      remote="CART"
+                      component="CheckoutPage"
+                    />
                   }
                 />
               </Routes>

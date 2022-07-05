@@ -11,7 +11,7 @@ type Props = {
   scope?: string;
 };
 
-const RemoteWrapper: FC<Props> = ({
+const RemoteComponent: FC<Props> = ({
   remote,
   component,
   scope = "default",
@@ -31,4 +31,4 @@ const RemoteWrapper: FC<Props> = ({
   );
 };
 
-export default RemoteWrapper;
+export default RemoteComponent;

@@ -3,9 +3,10 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import RemoteWrapper from "../RemoteWrapper";
+import RemoteComponent from "../RemoteComponent";
 
-const Cart = React.lazy(
+// TODO: Cart doesn't work. Circular issue with loading products within Cart?
+React.lazy(
   // @ts-ignore
   () => import("CART/Cart")
 );
@@ -22,9 +23,7 @@ const StoreHeader = () => {
           >
             Fruit Store
           </Typography>
-          <RemoteWrapper>
-            <Cart />
-          </RemoteWrapper>
+          <RemoteComponent remote="CART" component="Cart" />
         </Toolbar>
       </AppBar>
     </Box>
