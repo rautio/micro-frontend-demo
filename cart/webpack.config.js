@@ -4,25 +4,11 @@ const Dotenv = require("dotenv-webpack");
 const { dependencies } = require("./package.json");
 
 module.exports = (env) => {
-  const PRODUCTS_HOST = env.PRODUCTS_HOST || "http://localhost:9002";
   return {
     mode: "development",
     devServer: {
       port: 9003,
     },
-    // output: {
-    //   // library: 'cart',
-    //   libraryTarget: 'umd',
-    //   // filename: 'someLibName.js',
-    //   // auxiliaryComment: 'Test Comment',
-
-    //   path: path.join(__dirname, './dist'),
-    //   filename: 'myUnflappableComponent.js',
-    //   library: libraryName,
-    //   libraryTarget: 'umd',
-    //   publicPath: '/dist/',
-    //   umdNamedDefine: true
-    // },
     module: {
       rules: [
         {
