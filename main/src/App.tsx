@@ -5,6 +5,7 @@ import StoreHeader from "./components/StoreHeader";
 import RemoteControls from "./components/RemoteControls";
 import RemoteComponent from "./components/RemoteComponent";
 import RemotesProvider from "./context/remotes";
+
 export const App = () => {
   return (
     <RemotesProvider>
