@@ -5,6 +5,13 @@ import StoreHeader from "./components/StoreHeader";
 import RemoteControls from "./components/RemoteControls";
 import RemoteComponent from "./components/RemoteComponent";
 import RemotesProvider from "./context/remotes";
+import PubSub from "./services/pubsub";
+
+// Initialize PubSub Event messaging between apps
+const events = new PubSub({ persistedTopics: ["cart"] });
+// Set it at global level for all to consume (also passed as props)
+// @ts-ignore
+window.fsEvents = events;
 
 export const App = () => {
   return (

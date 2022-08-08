@@ -6,7 +6,15 @@ type Message = Record<string, unknown>;
 type ID = string;
 type OnMessageFn = (message: Message) => void;
 
-// TOOD: What to do if someone subscribers to a topic after messages have been published? Do we queue them?
+export type Subscribe = (topic: Topic, onMessage: OnMessageFn) => ID;
+export type Publish = (topic: Topic, message: Record<string, unknown>) => void;
+export type UnSusbscribe = (id: ID) => void;
+
+export interface Events {
+  subscribe: Subscribe;
+  publish: Publish;
+  unsubscribe: UnSusbscribe;
+}
 
 export class PubSub {
   constructor({ persistedTopics }: { persistedTopics?: Topic[] } = {}) {
@@ -15,13 +23,15 @@ export class PubSub {
     }
     if (persistedTopics) {
       this.persistedMessages = persistedTopics.reduce(
-        (acc: Record<Topic, Message[]>, cur: Topic) => {
-          acc[cur] = [];
+        (acc: Record<Topic, Message>, cur: Topic) => {
+          acc[cur] = {};
           return acc;
         },
         {}
       );
     }
+    this.subscribe.bind(this);
+    this.publish.bind(this);
   }
   // Keep track of all onMessage listeners with easy lookup by subscriptio id
   private subscriberOnMsg: Record<ID, OnMessageFn> = {};
@@ -30,7 +40,7 @@ export class PubSub {
   // Keep track of all topics and subscriber ids for each topic
   private topics: Record<Topic, ID[]> = {};
   // Keep track of messages that are persisted and sent to new subscribers
-  private persistedMessages: Record<Topic, Message[]> = {};
+  private persistedMessages: Record<Topic, Message> = {};
 
   /**
    * Subscribe to messages being published in the given topic.
@@ -57,9 +67,7 @@ export class PubSub {
     this.subscriberTopics[subID] = topic;
     // If the topic is persisted and there are existing messages, trigger the onMessage handler immediately
     if (topic in this.persistedMessages) {
-      this.persistedMessages[topic].forEach((msg) => {
-        onMessage(msg);
-      });
+      onMessage(this.persistedMessages[topic]);
     }
     return subID;
   }
@@ -68,7 +76,7 @@ export class PubSub {
    * Unsusbscribe for a given subscription id.
    * @param id Subscription id
    */
-  public unsuscribe(id: ID): void {
+  public unsubscribe(id: ID): void {
     // Validate inputs
     if (typeof id !== "string" || !validateUUID(id)) {
       throw new Error("ID must be a valid UUID.");
@@ -115,7 +123,7 @@ export class PubSub {
       });
     }
     if (topic in this.persistedMessages) {
-      this.persistedMessages[topic].push(message);
+      this.persistedMessages[topic] = message;
     }
   }
 }

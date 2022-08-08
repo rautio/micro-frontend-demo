@@ -14,8 +14,11 @@ interface State {
 const validItem = (item: Product) => {
   return !!item && typeof item === "object" && typeof item?.name === "string";
 };
-
 const STORAGE_ID = "fruit-shop-cart";
+
+// Global event bus for communicating between micro apps
+// @ts-ignore
+const eventBus = window.fsEvents;
 
 const getLocalState = (): Array<Product> => {
   const rawData = localStorage.getItem(STORAGE_ID);
@@ -29,10 +32,26 @@ const getLocalState = (): Array<Product> => {
 };
 
 const updateLocalState = (newCart: Array<Product>): void => {
+  eventBus.publish("cart", { cart: newCart });
   localStorage.setItem(STORAGE_ID, JSON.stringify(newCart));
 };
 
-export const useStore = create<State>((set) => ({
+// Initialize event bus with cart data
+if (eventBus) {
+  eventBus.subscribe("addItem", function (item: Product) {
+    const { getState } = store;
+    const { addItem } = getState();
+    addItem(item);
+  });
+  eventBus.subscribe("removeItem", function (item: Product) {
+    const { getState } = store;
+    const { removeItem } = getState();
+    removeItem(item.name, item?.quantity);
+  });
+  eventBus.publish("cart", { cart: getLocalState() });
+}
+
+export const store = create<State>((set) => ({
   cart: getLocalState(),
   addItem: (newItem) => {
     if (validItem(newItem)) {
@@ -77,6 +96,7 @@ export const useStore = create<State>((set) => ({
     }
   },
 }));
+export const useStore = store;
 
 export const useCartCount = (product?: string): number => {
   const products = useStore((store) => store.cart);

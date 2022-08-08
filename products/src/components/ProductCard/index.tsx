@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,8 +12,6 @@ import {
   Remove,
   Delete,
 } from "@mui/icons-material";
-// @ts-ignore
-import { useStore } from "CART/cartStore";
 import Fruit from "../Fruit";
 
 interface Props {
@@ -27,17 +25,22 @@ interface Product {
   quantity?: number;
 }
 
-// TODO: Import this interface from the cart module
-interface Store {
-  cart: Array<Product>;
-  addItem: () => void;
-  removeItem: () => void;
-}
+// @ts-ignore
+const events = window.fsEvents;
 
 export const ProductCard: FC<Props> = ({ name, price, cartView = false }) => {
-  const addItem = useStore((state: Store) => state.addItem);
-  const removeItem = useStore((state: Store) => state.removeItem);
-  const cart = useStore((state: Store) => state.cart);
+  const [cart, setCart] = useState<{ name: string; quantity: number }[]>([]);
+  useEffect(() => {
+    // @ts-ignore
+    const subID = events?.subscribe("cart", function ({ cart }) {
+      setCart(cart);
+    });
+    return () => {
+      if (subID) {
+        events?.unsubscribe(subID);
+      }
+    };
+  }, []);
   let action = (
     <Button
       size="small"
@@ -45,7 +48,7 @@ export const ProductCard: FC<Props> = ({ name, price, cartView = false }) => {
       endIcon={<AddShoppingCart />}
       sx={{ marginBottom: "40px" }}
       onClick={() => {
-        addItem({ name, price });
+        events?.publish("addItem", { name, price });
       }}
     >
       Add to Cart
@@ -64,17 +67,27 @@ export const ProductCard: FC<Props> = ({ name, price, cartView = false }) => {
         }}
       >
         <div>
-          <IconButton onClick={() => removeItem(name, 1)}>
+          <IconButton
+            onClick={() => {
+              events?.publish("removeItem", { name, quantity: 1 });
+            }}
+          >
             <Remove />
           </IconButton>
           {quantity}
-          <IconButton onClick={() => addItem({ name })}>
+          <IconButton
+            onClick={() => {
+              events?.publish("addItem", { name });
+            }}
+          >
             <Add />
           </IconButton>
         </div>
         <Button
           size="small"
-          onClick={() => removeItem(name, quantity)}
+          onClick={() => {
+            events?.publish("removeItem", { name, quantity });
+          }}
           endIcon={<Delete />}
         >
           Remove

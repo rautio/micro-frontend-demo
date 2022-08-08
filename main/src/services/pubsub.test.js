@@ -32,7 +32,7 @@ describe("PubSub should", () => {
     const subID = ps.subscribe("foo", onMessage);
     const message = { foo: "bar" };
     ps.publish("foo", message);
-    ps.unsuscribe(subID);
+    ps.unsubscribe(subID);
     ps.publish("foo", message);
     expect(onMessage).toHaveBeenCalledTimes(1);
   });
@@ -40,11 +40,13 @@ describe("PubSub should", () => {
     const ps = new PubSub({ persistedTopics: ["foo"] });
     const onMessage = jest.fn();
     const message = { foo: "bar" };
-    ps.publish("foo", message);
-    ps.publish("foo", message);
+    ps.publish("foo", { other: "not bar" });
+    ps.publish("foo", { alsoNotBar: "foo" });
+    // Persists only the last message
     ps.publish("foo", message);
     ps.subscribe("foo", onMessage);
     expect(onMessage).toHaveBeenCalledWith(message);
-    expect(onMessage).toHaveBeenCalledTimes(3);
+    // Only called once with the latest message
+    expect(onMessage).toHaveBeenCalledTimes(1);
   });
 });

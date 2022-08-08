@@ -41,7 +41,6 @@ module.exports = (env) => {
         filename: "remoteEntry.js",
         exposes: {
           "./Cart": "./src/components/CartButton",
-          "./cartStore": "./src/store",
           "./CheckoutPage": "./src/features/checkout",
         },
         remotes: {

@@ -43,7 +43,9 @@ const hydrateRemotes = (): Remote[] => {
 
 export const RemotesContext = createContext(initState);
 
-export const RemotesProvider: FC<{ children: any }> = ({ children }) => {
+export const RemotesProvider: FC<{
+  children: any;
+}> = ({ children }) => {
   const storedRemotes = hydrateRemotes();
   const [remotes, setRemotes] = useState<Remote[]>(
     storedRemotes.length > 0 ? storedRemotes : initRemotes
