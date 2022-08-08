@@ -49,6 +49,7 @@ module.exports = (env) => {
         name: "MAIN",
         remotes: {
           CART: `CART@${CART_HOST}/remoteEntry.js`,
+          PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
         },
         shared: {
           ...dependencies,

@@ -4,6 +4,7 @@ const Dotenv = require("dotenv-webpack");
 const { dependencies } = require("./package.json");
 
 module.exports = (env) => {
+  const PRODUCTS_HOST = env.PRODUCTS_HOST || "http://localhost:9002";
   return {
     mode: "development",
     devServer: {
@@ -44,9 +45,8 @@ module.exports = (env) => {
           "./CheckoutPage": "./src/features/checkout",
         },
         remotes: {
-          // PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
+          PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
         },
-
         shared: {
           ...dependencies,
           react: {

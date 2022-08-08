@@ -21,6 +21,7 @@ const RemoteComponent: FC<Props> = ({
 }) => {
   const [remotes] = useRemotes();
   const remoteUrl = findRemoteUrl(remote, remotes);
+  if (!remoteUrl) return <div>Unable to Fetch: {`${remote}/${component}`}</div>;
   const Component = React.lazy(
     loadComponent(remote, remoteUrl, `./${component}`, scope)
   );

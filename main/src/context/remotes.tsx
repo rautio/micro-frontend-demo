@@ -61,6 +61,10 @@ export const RemotesProvider: FC<{
       return newRemotes;
     });
   };
+  // Storing remote URLs on global object so we can access them in other apps without
+  // this provider being initialized.
+  // @ts-ignore
+  window.fsRemotes = remotes;
   const RemotesCtx: Remotes = {
     remotes,
     updateRemoteUrl,
@@ -77,6 +81,7 @@ export const useRemotes = (): [
   Remote[],
   (name: string, newUrl: string) => void
 ] => {
-  const { remotes, updateRemoteUrl } = useContext(RemotesContext);
-  return [remotes, updateRemoteUrl];
+  const { updateRemoteUrl } = useContext(RemotesContext);
+  // @ts-ignore
+  return [window.fsRemotes, updateRemoteUrl];
 };

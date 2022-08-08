@@ -35,7 +35,7 @@ export const CheckoutPage = () => {
         {cart.map(({ name, quantity }) => (
           <div key={name} style={{ margin: 20 }}>
             <RemoteComponent
-              fallback="loading"
+              fallback="Loading..."
               remote="PRODUCTS"
               component="ProductCard"
               name={name}

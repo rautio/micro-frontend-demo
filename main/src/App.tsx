@@ -38,7 +38,7 @@ export const App = () => {
                   path="/checkout"
                   element={
                     <RemoteComponent
-                      fallback="Loading..."
+                      fallback="Loading Checkout..."
                       remote="CART"
                       component="CheckoutPage"
                     />
