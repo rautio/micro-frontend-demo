@@ -9,12 +9,28 @@ type OnMessageFn = (message: Message) => void;
 // TOOD: What to do if someone subscribers to a topic after messages have been published? Do we queue them?
 
 export class PubSub {
+  constructor({ persistedTopics }: { persistedTopics?: Topic[] } = {}) {
+    if (persistedTopics && !Array.isArray(persistedTopics)) {
+      throw new Error("Persisted topics must be an array of topics.");
+    }
+    if (persistedTopics) {
+      this.persistedMessages = persistedTopics.reduce(
+        (acc: Record<Topic, Message[]>, cur: Topic) => {
+          acc[cur] = [];
+          return acc;
+        },
+        {}
+      );
+    }
+  }
   // Keep track of all onMessage listeners with easy lookup by subscriptio id
   private subscriberOnMsg: Record<ID, OnMessageFn> = {};
   // Keep track of the topic for each subscription id for easier cleanup
   private subscriberTopics: Record<ID, Topic> = {};
   // Keep track of all topics and subscriber ids for each topic
   private topics: Record<Topic, ID[]> = {};
+  // Keep track of messages that are persisted and sent to new subscribers
+  private persistedMessages: Record<Topic, Message[]> = {};
 
   /**
    * Subscribe to messages being published in the given topic.
@@ -39,6 +55,12 @@ export class PubSub {
     // Store onMessage and topic separately for faster lookup
     this.subscriberOnMsg[subID] = onMessage;
     this.subscriberTopics[subID] = topic;
+    // If the topic is persisted and there are existing messages, trigger the onMessage handler immediately
+    if (topic in this.persistedMessages) {
+      this.persistedMessages[topic].forEach((msg) => {
+        onMessage(msg);
+      });
+    }
     return subID;
   }
 
@@ -91,6 +113,9 @@ export class PubSub {
           this.subscriberOnMsg[id](message);
         }
       });
+    }
+    if (topic in this.persistedMessages) {
+      this.persistedMessages[topic].push(message);
     }
   }
 }
