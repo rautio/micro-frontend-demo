@@ -33,7 +33,7 @@ export class PubSub {
     this.subscribe.bind(this);
     this.publish.bind(this);
   }
-  // Keep track of all onMessage listeners with easy lookup by subscriptio id
+  // Keep track of all onMessage listeners with easy lookup by subscription id
   private subscriberOnMsg: Record<ID, OnMessageFn> = {};
   // Keep track of the topic for each subscription id for easier cleanup
   private subscriberTopics: Record<ID, Topic> = {};
