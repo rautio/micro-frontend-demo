@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+// @ts-ignore
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import StoreHeader from "./components/StoreHeader";
 import RemoteControls from "./components/RemoteControls";
@@ -23,28 +24,22 @@ export const App = () => {
           <>
             <StoreHeader />
             <div style={{ marginTop: 40 }}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <RemoteComponent
-                      fallback="Loading Products..."
-                      remote="PRODUCTS"
-                      component="ProductsList"
-                    />
-                  }
-                />
-                <Route
-                  path="/checkout"
-                  element={
-                    <RemoteComponent
-                      fallback="Loading Checkout..."
-                      remote="CART"
-                      component="CheckoutPage"
-                    />
-                  }
-                />
-              </Routes>
+              <Switch>
+                <Route exact path="/">
+                  <RemoteComponent
+                    fallback="Loading Products..."
+                    remote="PRODUCTS"
+                    component="ProductsList"
+                  />
+                </Route>
+                <Route exact path="/checkout">
+                  <RemoteComponent
+                    fallback="Loading Checkout..."
+                    remote="CART"
+                    component="CheckoutPage"
+                  />
+                </Route>
+              </Switch>
             </div>
           </>
         </BrowserRouter>

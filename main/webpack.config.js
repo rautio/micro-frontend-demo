@@ -48,8 +48,8 @@ module.exports = (env) => {
       new ModuleFederationPlugin({
         name: "MAIN",
         remotes: {
-          CART: `CART@${CART_HOST}/remoteEntry.js`,
-          PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
+          // CART: `CART@${CART_HOST}/remoteEntry.js`,
+          // PRODUCTS: `PRODUCTS@${PRODUCTS_HOST}/remoteEntry.js`,
         },
         shared: {
           ...dependencies,

@@ -5,12 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import RemoteComponent from "../RemoteComponent";
 
-// TODO: Cart doesn't work. Circular issue with loading products within Cart?
-React.lazy(
-  // @ts-ignore
-  () => import("CART/Cart")
-);
-
 const StoreHeader = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>

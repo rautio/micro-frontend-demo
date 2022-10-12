@@ -5,7 +5,7 @@ import Launch from "@mui/icons-material/Launch";
 import ListItem from "@mui/material/ListItem";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { useRemotes } from "../../context/remotes";
+import { useRemotes, STORAGE_KEY } from "../../context/remotes";
 import { findRemoteUrl } from "../../utils/remote";
 
 export const RemoteControls = () => {
@@ -23,6 +23,10 @@ export const RemoteControls = () => {
   const handleReloadApp = () => {
     updateRemoteUrl("PRODUCTS", productsUrl);
     updateRemoteUrl("CART", cartUrl);
+    window.location.reload();
+  };
+  const handleReset = () => {
+    localStorage.removeItem(STORAGE_KEY);
     window.location.reload();
   };
   return (
@@ -87,6 +91,15 @@ export const RemoteControls = () => {
         endIcon={<Cached />}
       >
         Reload
+      </Button>
+      <Button
+        sx={{ marginLeft: "12px" }}
+        size="small"
+        variant="outlined"
+        aria-label="reset app"
+        onClick={handleReset}
+      >
+        Reset
       </Button>
     </List>
   );

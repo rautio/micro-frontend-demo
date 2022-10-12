@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import { Link } from "react-router-dom";
 import useStore from "../../store";
 import RemoteComponent from "../../../../main/src/components/RemoteComponent";

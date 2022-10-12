@@ -20,7 +20,7 @@ const initState: Remotes = {
   updateRemoteUrl: () => {},
 };
 
-const STORAGE_KEY = "fruit-remotes";
+export const STORAGE_KEY = "fruit-remotes";
 
 const storeRemotes = (remotes: Remote[]) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(remotes));

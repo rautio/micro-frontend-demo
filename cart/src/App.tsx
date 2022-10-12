@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import { BrowserRouter } from "react-router-dom";
 import Cart from "./components/CartButton";
 
