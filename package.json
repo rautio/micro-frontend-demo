@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "turbo": "^1.2.5"
+    "turbo": "^1.10.12"
   },
   "scripts": {
     "start": "yarn turbo run start",
-    "build": "yarn turbo run build"
+    "build": "yarn turbo run build",
+    "test": "yarn turbo run test"
   },
   "workspaces": [
     "main",
@@ -31,5 +32,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@3.6.1"
 }
