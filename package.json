@@ -2,6 +2,10 @@
   "name": "micro-frontend-demo",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0 "
+  },
   "devDependencies": {
     "turbo": "^1.10.12"
   },
