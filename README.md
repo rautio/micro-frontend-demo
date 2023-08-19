@@ -1,6 +1,6 @@
 # Micro Frontend Demo
 
-A sample repo for demoing a micro frontend architecture setup with dynamic remote modules.
+A project for demoing a micro frontend architecture in React with dynamic remote modules.
 
 Check out the live version: [https://micro-frontend-demo-main.vercel.app/](https://micro-frontend-demo-main.vercel.app/)
 
