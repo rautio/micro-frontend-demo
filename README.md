@@ -1,6 +1,10 @@
 # Micro Frontend Demo
 
-A sample repo for demoing a micro frontend architecture setup.
+A sample repo for demoing a micro frontend architecture setup with dynamic remote modules.
+
+Check out the live version: [https://micro-frontend-demo-main.vercel.app/](https://micro-frontend-demo-main.vercel.app/)
+
+![Micro Frontend Fruit Store](./docs/demo.png)
 
 ## Getting started
 
@@ -11,9 +15,11 @@ Main Host App: `http://localhost:9001/`
 Products Remote: `http://localhost:9002/`
 Cart Remote: `http://localhost:9003/`
 
-## Architecture
+## Demo
 
-TBD
+Once you have the local app running go to the live instance [https://micro-frontend-demo-main.vercel.app/](https://micro-frontend-demo-main.vercel.app/) and change the URLs for the Products or Cart remote to the localhost version. Make some code changes and watch as the production version of `main` reflects your local changes!
+
+Of course, this is only visible to you but this pattern opens the door for a lot of interesting and helpful developer experiences.
 
 ## Dynamic Remotes
 
@@ -59,20 +65,6 @@ Within the implementation we call a loadComponent function that acts as a middle
 
 - How to use Webpack Module Federation in React: https://betterprogramming.pub/how-to-use-webpack-module-federation-in-react-70455086b2b0
 - Zustand in a Micro Frontend: https://betterprogramming.pub/zustand-in-a-micro-frontend-b92d02a51577
-
-### Open Items
-
-- Dynamic remote URLs
-- Deployment
-- Sharing state from host to application (props)
-- Sharing global state from host to remotes (zustand?)
-- Sharing local storage (persist cart)
-- Central analytics event stream
-- Error Boundary/Safe loading. + Suspense in 'FederatedWrapper'
-- Versioning between host and remotes
-- Versioning node_modules?
-- Routing. How do you do in-browser linking from a remote component when the host is the one controlling the router? What happens if you use mismatching versions of react-router?
-- How can you share local/session state between remote and host?
 
 ### Rendering Remote React Components
 
