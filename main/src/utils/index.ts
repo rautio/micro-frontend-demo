@@ -1,5 +1,4 @@
-// @ts-ignore
-
+// @ts-nocheck
 export const fetchRemote = (url, remoteName) =>
   new Promise((resolve, reject) => {
     // We define a script tag to use the browser for fetching the remoteEntry.js file
