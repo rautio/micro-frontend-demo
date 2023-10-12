@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 // @ts-ignore
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import useStore from "../../store";
 import RemoteComponent from "../../../../main/src/components/RemoteComponent";
@@ -30,7 +30,7 @@ type Product = {
 export const CheckoutPanel: FC<Props> = ({ onClose }) => {
   // @ts-ignore
   const cart = useStore((store) => store.cart);
-  const history = useHistory();
+  const navigate = useNavigate();
   let total = 0;
   for (let i = 0; i < cart.length; i++) {
     const product: Product = cart[i];
@@ -44,7 +44,7 @@ export const CheckoutPanel: FC<Props> = ({ onClose }) => {
           variant="contained"
           onClick={() => {
             onClose();
-            history.push("checkout");
+            navigate("checkout");
           }}
         >
           Checkout
